@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.vite/
+test-results/
+playwright-report/
+*.tsbuildinfo
+__pycache__/
+.aidevops/
+*.log
+*.tmp
+.env
+.env.local

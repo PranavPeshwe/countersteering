@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#101c24" />
+    <meta name="description" content="Learn countersteering in an original Classic 350-inspired cockpit with guided demonstrations and simple practice controls." />
+    <title>First Ride - Countersteering</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#ride">Skip to the simulator</a>
+    <header class="site-header">
+      <a class="wordmark" href="#start"><span class="brand-icon" aria-hidden="true">FR</span> FIRST RIDE</a>
+      <span class="header-note">Countersteering / Classic 350-style cockpit</span>
+      <span class="version-badge">MVP 02</span>
+    </header>
+
+    <div class="layout">
+      <aside class="index-panel" aria-label="Page index">
+        <p class="eyebrow">YOUR GUIDE</p>
+        <nav id="section-index" aria-label="All page sections"></nav>
+        <div class="index-note">
+          <span class="status-dot" aria-hidden="true"></span>
+          One small lesson.<br />Watch. Try. Understand.
+        </div>
+      </aside>
+
+      <main id="main-content">
+        <section class="intro" aria-labelledby="start">
+          <div>
+            <p class="eyebrow">LEARN THE FEEL, SEE THE RESPONSE</p>
+            <h1 id="start">A brief press. A different direction.</h1>
+            <p class="lede">To start a right lean, press the right grip forward. The front wheel first points left. See why input, lean, and the turn are different.</p>
+          </div>
+          <div class="intro-number" aria-hidden="true"><span>01</span> COUNTERSTEERING</div>
+        </section>
+
+        <section class="ride-card" aria-labelledby="ride">
+          <div class="section-bar">
+            <div><p class="eyebrow">FIRST-PERSON VIEW</p><h2 id="ride">Watch once. Then take the grips.</h2></div>
+            <div class="mode-chip" id="mode-chip">Ready to learn</div>
+          </div>
+
+          <div class="settings">
+            <label>Turn to explore
+              <select id="turn-side" aria-label="Turn to explore">
+                <option value="right">Right turn</option>
+                <option value="left">Left turn</option>
+              </select>
+            </label>
+            <label>Example speed
+              <select id="speed-preset" aria-label="Example speed">
+                <option value="10">36 km/h</option>
+                <option value="20">72 km/h</option>
+              </select>
+            </label>
+            <label class="toggle"><input id="comfort-camera" type="checkbox" checked /> Comfort camera</label>
+            <label class="toggle"><input id="slow-motion" type="checkbox" /> Slow motion (1/4 playback)</label>
+          </div>
+
+          <div class="press-lab" aria-labelledby="press-lab">
+            <div class="press-lab-top"><h3 id="press-lab">Explore the press, not just the grip.</h3><span class="virtual-tag">VIRTUAL INPUTS</span></div>
+            <div class="press-options">
+              <div class="style-options" role="radiogroup" aria-label="Press style">
+                <button type="button" role="radio" aria-checked="true" data-press-style="hold"><strong>Steady hold</strong><small>Hold / release</small></button>
+                <button type="button" role="radio" aria-checked="false" data-press-style="gentle"><strong>Gentle push</strong><small>Hold / smooth pulses</small></button>
+                <button type="button" role="radio" aria-checked="false" data-press-style="quick"><strong>Quick push</strong><small>Hold / brief pulses</small></button>
+                <button type="button" role="radio" aria-checked="false" data-press-style="jerk"><strong>Sharp jerk</strong><small>Hold / fast pulses</small></button>
+                <button type="button" role="radio" aria-checked="false" data-press-style="strong"><strong>Strong jerk</strong><small>Hold / firmer pulses</small></button>
+              </div>
+              <div class="press-adjustments">
+                <label>Push direction
+                  <select id="press-direction" aria-label="Push direction">
+                    <option value="forward">Forward - away from rider</option>
+                    <option value="backward">Backward - towards rider</option>
+                    <option value="side-in">Side press - inward</option>
+                    <option value="side-out">Side press - outward</option>
+                    <option value="top">Top press - downward</option>
+                    <option value="diagonal">Forward + downward</option>
+                  </select>
+                </label>
+                <label class="strength-control">Virtual strength <output id="strength-value">Normal / 25%</output>
+                  <input id="press-strength" type="range" min="0" max="100" step="1" value="25" aria-label="Virtual strength" />
+                  <span class="range-labels"><span>Light</span><span>Firm</span><span>Strong</span></span>
+                </label>
+              </div>
+            </div>
+            <div class="press-feedback">
+              <div>
+                <p id="press-description">Hold a grip for steady pressure. Release removes the input.</p>
+                <p class="direction-notice" id="direction-notice">Forward force acts through steering torque in this example.</p>
+              </div>
+              <div class="pressure-plot">
+                <svg viewBox="0 0 280 72" role="img" aria-label="Applied virtual pressure trace">
+                  <path class="trace-grid" d="M8 8v56h264M8 36h264M8 8h264" />
+                  <polyline id="left-trace" points="8,64 272,64" />
+                  <polyline id="right-trace" points="8,64 272,64" />
+                </svg>
+                <span>Live pressure / left amber / right teal</span>
+              </div>
+            </div>
+            <details class="press-tuning">
+              <summary>Tune pulse duration and abruptness</summary>
+              <div class="tuning-content">
+                <h4 id="pulse-timing">Pulse timing, not a riding prescription</h4>
+                <label>Pulse duration <output id="duration-value">1.00 s</output><input id="press-duration" type="range" min="0.08" max="1.5" step="0.01" value="1" aria-label="Pulse duration" /></label>
+                <label>Rise time <output id="attack-value">20 ms</output><input id="press-attack" type="range" min="0.004" max="0.5" step="0.001" value="0.02" aria-label="Pulse rise time" /></label>
+                <p>Shorter rise time means a more abrupt virtual input. Hold to repeat the selected pulse; release stops it. "Jerk" names the input style here, not measured motorcycle jerk. Blinking shows active input, not a guaranteed turn.</p>
+              </div>
+            </details>
+          </div>
+
+          <div class="playback">
+            <button class="button primary" id="show-demo" type="button">Show me</button>
+            <button class="button secondary" id="start-practice" type="button">Your turn</button>
+            <button class="button quiet" id="pause-trial" type="button">Resume</button>
+            <button class="button quiet" id="reset-trial" type="button">Reset</button>
+            <div class="trial-progress"><span id="trial-label">Same input. Five-second observation.</span><progress id="demo-progress" max="5" value="0" aria-label="Demonstration progress"></progress></div>
+          </div>
+
+          <div class="simulation-shell" id="simulation-shell" data-running="false" data-time="0">
+            <canvas id="rider-canvas" aria-label="Moving road and Classic 350-inspired motorcycle cockpit from the rider's viewpoint"></canvas>
+            <div class="view-topline">
+              <span>CLASSIC-STYLE RIDER VIEW / <span id="live-input-label">Steady hold / forward / 25%</span></span>
+              <span id="camera-label">Camera stabilized; bike lean is unchanged</span>
+            </div>
+            <div class="speedometer" aria-label="Speedometer">
+              <span class="speed-label">EXAMPLE SPEED</span>
+              <strong id="speed-value">36</strong><span class="speed-unit">km/h</span>
+              <span id="ride-status">Paused</span>
+            </div>
+            <div class="ride-readouts" aria-label="Live wheel, lean, and path cues">
+              <span><small>FRONT WHEEL</small><output id="hud-wheel">Straight</output></span>
+              <span><small>BIKE LEAN</small><output id="hud-lean">Straight</output></span>
+              <span><small>ROAD HEADING</small><output id="hud-heading">Straight</output></span>
+            </div>
+            <div class="rear-label">REAR VIEW / ACTUAL LEAN</div>
+            <div class="error-card" id="render-error" role="alert" hidden></div>
+          </div>
+
+          <div class="grip-controls">
+            <button class="grip left-grip" id="grip-left" type="button" aria-pressed="false" aria-describedby="grip-help">
+              <span class="grip-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20V5M5 12l7-7 7 7" /></svg></span>
+              <span><strong>Press left grip</strong><small id="left-grip-help">Hold here or hold A</small></span>
+              <kbd>A</kbd>
+            </button>
+            <div class="torque-note"><span id="pressure-label">No virtual pressure</span><small id="grip-help">Hold to press forward. Release to stop the input.</small></div>
+            <button class="grip right-grip" id="grip-right" type="button" aria-pressed="false" aria-describedby="grip-help">
+              <span class="grip-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20V5M5 12l7-7 7 7" /></svg></span>
+              <span><strong>Press right grip</strong><small id="right-grip-help">Hold here or hold D</small></span>
+              <kbd>D</kbd>
+            </button>
+          </div>
+
+          <div class="coach" id="coach" aria-live="polite" aria-atomic="true">
+            <span class="coach-mark" aria-hidden="true">i</span>
+            <div><strong id="coach-title">Choose a turn. Watch once. Then try it.</strong><p id="coach-text">Show me makes one brief virtual press. Your turn gives you the controls.</p></div>
+          </div>
+          <p class="model-strip">Educational simulator. Strong/abrupt presses are virtual experiments, not riding advice. Direct body loading, skids, falls, and walking-speed balance are not simulated.</p>
+        </section>
+
+        <section class="response-section" aria-labelledby="response">
+          <div class="section-bar plain"><div><p class="eyebrow">READ THE THREE RESPONSES</p><h2 id="response">The wheel, the lean, and the path.</h2></div><span class="tiny-note">Actual values. No forced lean.</span></div>
+          <div class="response-grid">
+            <article class="response-card">
+              <h3 id="wheel-direction">1. Front wheel</h3>
+              <div class="wheel-diagram" id="wheel-diagram" data-direction="straight" aria-hidden="true">
+                <svg viewBox="0 0 140 82"><path class="diagram-center" d="M70 4v74" /><path class="diagram-arc" d="M35 37Q70 2 105 37" /><g class="diagram-wheel"><rect x="60" y="19" width="20" height="46" rx="8" /><path d="M64 30h12m-12 12h12m-12 12h12" /></g></svg>
+                <span id="wheel-direction-label">Straight</span>
+              </div>
+              <output id="wheel-value" data-radians="0">Straight</output>
+              <small>Direction diagram, not angle scale. The 3D wheel uses the actual angle.</small>
+            </article>
+            <article class="response-card">
+              <h3 id="bike-lean">2. Motorcycle lean</h3>
+              <div class="lean-diagram" aria-hidden="true"><span class="lean-baseline"></span><span class="lean-needle" id="lean-needle"></span><span class="lean-ground"></span></div>
+              <output id="lean-value" data-radians="0">Straight</output>
+              <small>A brief steer away from the turn helps start the lean into it.</small>
+            </article>
+            <article class="response-card">
+              <h3 id="road-path">3. Road path</h3>
+              <div class="path-symbol" aria-hidden="true"><svg viewBox="0 0 140 82"><path d="M70 75V10" class="path-reference" /><path id="path-arrow" d="M70 75Q70 35 70 10" /><path d="M65 18l5-8 5 8" class="path-tip" /></svg></div>
+              <output id="heading-value" data-radians="0">Straight</output>
+              <small>The path follows the calculated steering response. It is not a canned turn.</small>
+            </article>
+          </div>
+          <div class="observations" aria-label="Responses observed in this trial">
+            <span id="observed-wheel" data-observed="false">Wheel first away</span>
+            <span id="observed-lean" data-observed="false">Lean into turn</span>
+            <span id="observed-path" data-observed="false">Path into turn</span>
+          </div>
+        </section>
+
+        <section class="lesson-section" aria-labelledby="your-turn">
+          <p class="eyebrow">YOUR NEXT EXPERIMENT</p>
+          <h2 id="your-turn">Try a short press, not a permanent instruction.</h2>
+          <div class="lesson-grid">
+            <article><span class="step-number">01</span><h3 id="watch-first">Watch first</h3><p>Choose Show me. Follow the grip arrow, front-wheel diagram, lean indicator, and rear view.</p></article>
+            <article><span class="step-number">02</span><h3 id="repeat-it">Repeat it</h3><p>Choose Your turn. For the selected turn, briefly hold that side's grip. Then release and watch the existing motion.</p></article>
+            <article><span class="step-number">03</span><h3 id="try-the-other-grip">Try the other grip</h3><p>Reset. Press the other grip or hold longer. The model calculates the response. It does not invent a crash.</p></article>
+          </div>
+        </section>
+
+        <section class="compare-section" aria-labelledby="compare-speeds">
+          <p class="eyebrow">SAME PRESS / DIFFERENT SPEED</p>
+          <h2 id="compare-speeds">Compare 36 and 72 km/h.</h2>
+          <p>Pause, select the other example speed, then repeat Show me. Keep direction, style, strength, and timing the same for a fair comparison.</p>
+          <div class="comparison-readout">
+            <div><span>Current example</span><strong id="comparison-speed">36 km/h</strong></div>
+            <div><span>Peak lean in this trial</span><strong id="peak-lean">0.00 degrees</strong></div>
+            <div><span>Peak wheel angle</span><strong id="peak-steer">0.00 degrees</strong></div>
+            <div><span>Trial time</span><strong id="elapsed">0.00 s</strong></div>
+          </div>
+          <p class="callout">The presets are not countersteering on/off speeds. Speed changes the response. Very slow-speed balance is outside this prototype.</p>
+        </section>
+
+        <section class="explanation-section" aria-labelledby="why-it-works">
+          <p class="eyebrow">THE WHY, WITHOUT A LECTURE</p>
+          <h2 id="why-it-works">Start the lean. Then follow the response.</h2>
+          <p>A brief steer away from the desired turn changes the bike's motion and helps create the lean into the turn.</p>
+          <p>Tire forces, steering geometry, mass distribution, and wheel rotation contribute. Wheel rotation alone is not the complete explanation.</p>
+          <p>Grip pressure is an input. Wheel angle and lean are responses. Releasing the grip removes input, not the motion that already exists.</p>
+          <details id="physics-details">
+            <summary>Show the model, assumptions, and actual numbers</summary>
+            <div class="details-content">
+              <h3 id="physics-model">A small-angle teaching model</h3>
+              <p>This prototype integrates the coupled lean and steer equations from J. Fajans (2000). The source's damping remains explicit. No balance controller assigns a successful lean.</p>
+              <p>The example uses inferred Sportster parameters, not measured Royal Enfield handling. The road path uses an additional small-angle, non-slip approximation.</p>
+              <p>The Classic 350-inspired visuals are an original approximation, not official CAD or vehicle calibration. The virtual grip anchors and steering model remain unchanged.</p>
+              <p>The mirror surfaces use generated visual reflections, not a live rear-traffic feed. Use the external inset to observe the model's actual lean and path.</p>
+              <h3 id="live-physics">Live physics values</h3>
+              <dl class="physics-values"><div><dt>Steering torque</dt><dd id="torque-value">0.00 Nm</dd></div><div><dt>Virtual grip forces</dt><dd id="force-value">0.00 / 0.00 N</dd></div><div><dt>Speed</dt><dd id="speed-ms">10.00 m/s</dd></div><div><dt>Yaw / heading</dt><dd id="yaw-value">0.00 degrees</dd></div><div><dt>Lateral position</dt><dd id="lateral-value">0.00 m</dd></div></dl>
+              <h3 id="force-projection">Directional forces: steering effects only</h3>
+              <p>The input example uses a straight virtual bar, a 0.30 m grip lever, and an ideal vertical steering axis. Only the steering component of the force moment enters the model.</p>
+              <p>Side and top-down presses project zero steering torque in this example. That does not mean these presses are harmless or have no effect on a real motorcycle. Body reactions and real bar geometry are not modeled.</p>
+              <h3 id="integration">Numerical integration</h3>
+              <p>A fixed 240-step-per-second RK4 solver advances the physics. Render interpolation and comfort camera settings do not change the dynamics.</p>
+              <p>The angular pulse response has a separate matrix-exponential reference. Numerical agreement is not proof of real motorcycle accuracy.</p>
+              <h3 id="profile-parameters">Example parameters</h3>
+              <p>Combined mass: 300 kg. Wheelbase: 1.54 m. Wheel radius: 0.29 m. Steering damping: 3 Nm s.</p>
+            </div>
+          </details>
+        </section>
+
+        <section class="limits-section" aria-labelledby="model-limits">
+          <p class="eyebrow">KNOW WHAT THIS VERSION DOES NOT SHOW</p>
+          <h2 id="model-limits">A model boundary is not a fall.</h2>
+          <p>The trial pauses beyond 10 degrees of lean or 5 degrees of steering. Those are conservative design boundaries, not real motorcycle safety limits.</p>
+          <p>This version does not calculate tire slip, grip loss, ground contact after a fall, or walking-speed rider balance.</p>
+          <p>Keep experiments inside this simulator. Use qualified hands-on rider instruction for practical riding skills.</p>
+        </section>
+
+        <section class="sources-section" aria-labelledby="sources">
+          <h2 id="sources">Sources and scope</h2>
+          <p><a href="https://physics.berkeley.edu/sites/default/files/bulk_3/SteerBikeAJP.PDF" target="_blank" rel="noopener noreferrer">J. Fajans: Steering in bicycles and motorcycles (2000)</a> - approximate dynamics and parameter provenance.</p>
+          <p><a href="https://msf-usa.org/start-your-ride/basic-ridercourse/" target="_blank" rel="noopener noreferrer">Motorcycle Safety Foundation: Basic RiderCourse</a> - rider education context.</p>
+          <p><a href="https://arendschwab.com/research/stablebicycle/" target="_blank" rel="noopener noreferrer">Kooijman and collaborators: bicycle stability experiment</a> - limits of a gyroscope-only explanation, not motorcycle calibration.</p>
+          <p><a href="https://www.royalenfield.com/content/dam/open-pdf/royal-enfield-classic-350-owners-manual-english-united-kingdom.pdf" target="_blank" rel="noopener noreferrer">Royal Enfield Classic 350 owner's manual</a> - cockpit visual references only. No OEM photos or models are bundled.</p>
+          <p class="footer-note">First Ride / Classic 350-inspired cockpit. Richer visuals do not change the approximate handling model or its limits.</p>
+        </section>
+      </main>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

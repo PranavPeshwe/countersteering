@@ -1,0 +1,33 @@
+{
+  "name": "countersteering-first-ride",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A learner-first, physics-based countersteering wireframe.",
+  "scripts": {
+    "dev": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/project_20261003_120951.ps1 -Action dev",
+    "build": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/project_20261003_120951.ps1 -Action build",
+    "typecheck": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/project_20261003_120951.ps1 -Action typecheck",
+    "test": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/project_20261003_120951.ps1 -Action test",
+    "test:browser": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/project_20261003_120951.ps1 -Action test-browser",
+    "browsers:install": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/project_20261003_120951.ps1 -Action browsers",
+    "reference": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/project_20261003_120951.ps1 -Action reference",
+    "preview": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/project_20261003_120951.ps1 -Action preview",
+    "open:preview": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/project_20261003_120951.ps1 -Action open-preview"
+  },
+  "dependencies": {
+    "three": "0.186.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "@types/node": "^22.0.0",
+    "@types/three": "0.186.0",
+    "mathjs": "15.2.0",
+    "typescript": "7.0.2",
+    "vite": "8.3.1",
+    "vitest": "5.0.2"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}
