@@ -6,7 +6,7 @@ The graphics upgrade targets an original Royal Enfield Classic 350-inspired ride
 
 ## Live app
 
-Use the simulator at [pranavpeshwe.github.io/pp_countersteering](https://pranavpeshwe.github.io/pp_countersteering/).
+Use the simulator at [pranavpeshwe.github.io/countersteering](https://pranavpeshwe.github.io/countersteering/).
 The app runs in the browser and requires WebGL 2.
 
 The GitHub Pages workflow runs the unit tests and builds the site after each push to `main`.
