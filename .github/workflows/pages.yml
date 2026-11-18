@@ -1,0 +1,68 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: windows-latest
+    permissions:
+      contents: read
+      pages: read
+    defaults:
+      run:
+        shell: powershell
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Set up Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '22'
+      - name: Prepare the external artifact drive
+        run: |
+          if (Test-Path 'Q:\') {
+            throw 'The hosted runner already has a Q: drive.'
+          }
+          $volume = Join-Path $env:RUNNER_TEMP 'countersteering-volume'
+          New-Item -ItemType Directory -Path $volume -Force | Out-Null
+          subst.exe Q: $volume
+          if ($LASTEXITCODE -ne 0) {
+            throw 'The temporary Q: drive could not be created.'
+          }
+          New-Item -ItemType Directory -Path 'Q:\pp_exp\pp_countersteering_artifacts' -Force | Out-Null
+      - name: Install dependencies
+        run: powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\project_20261003_120951.ps1 -Action install
+      - name: Run unit tests
+        run: powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\project_20261003_120951.ps1 -Action test
+      - name: Build the site
+        run: powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\project_20261003_120951.ps1 -Action build
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
+      - name: Upload the compiled site
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: 'Q:\pp_exp\pp_countersteering_artifacts\dist'
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1

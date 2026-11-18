@@ -4,6 +4,15 @@ A browser tutorial for someone who learns motorcycling.
 Watch one demonstration, repeat it with the grips, then compare the wheel, lean, and road path.
 The graphics upgrade targets an original Royal Enfield Classic 350-inspired rider cockpit.
 
+## Live app
+
+Use the simulator at [pranavpeshwe.github.io/pp_countersteering](https://pranavpeshwe.github.io/pp_countersteering/).
+The app runs in the browser and requires WebGL 2.
+
+The GitHub Pages workflow runs the unit tests and builds the site after each push to `main`.
+Its hosted Windows runner maps a temporary directory to `Q:` and uses the existing project scripts.
+The workflow publishes only the compiled site, not dependencies or test artifacts.
+
 ## Start
 
 Use Windows PowerShell 5.x and Node.js 22.12 or later.
